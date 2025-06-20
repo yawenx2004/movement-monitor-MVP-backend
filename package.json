@@ -1,0 +1,24 @@
+{
+  "name": "movement-monitor-mvp-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yawenx2004/movement-monitor-MVP-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/yawenx2004/movement-monitor-MVP-backend/issues"
+  },
+  "homepage": "https://github.com/yawenx2004/movement-monitor-MVP-backend#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

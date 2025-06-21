@@ -60,7 +60,7 @@ setInterval(() => {
     const isInactive = now - lastTime > INACTIVITY_THRESHOLD_MS;
 
     if (isStationary && isInactive) {
-      console.warn(`🚨 ${name} has not moved in over 2 minutes!`);
+      console.log(`🚨 ${name} has not moved in over 2 minutes!`);
       // TODO: send push notification + mock alert
     }
   }

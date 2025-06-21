@@ -14,9 +14,20 @@ const locationData = {};
 const lastMovedAt = {};
 const userPushTokens = {};
 
-const areCoordsEqual = (a, b) => (
-  a.latitude === b.latitude && a.longitude === b.longitude
-);
+// round coordinates to 4 decimal places
+const roundCoords = ({ latitude, longitude }) => ({
+  latitude: parseFloat(latitude.toFixed(4)),
+  longitude: parseFloat(longitude.toFixed(4)),
+});
+
+const areCoordsEqual = (a, b) => {
+  const aRounded = roundCoords(a);
+  const bRounded = roundCoords(b);
+  return (
+    aRounded.latitude === bRounded.latitude &&
+    aRounded.longitude === bRounded.longitude
+  );
+};
 
 // receive location updates
 app.post('/location', (req, res) => {
@@ -27,7 +38,8 @@ app.post('/location', (req, res) => {
   }
 
   const timestamp = new Date().toISOString();
-  const entry = { timestamp, coords };
+  const roundedCoords = roundCoords(coords);
+  const entry = { timestamp, coords: roundedCoords };
 
   if (!locationData[name]) {
     locationData[name] = [];
@@ -41,7 +53,7 @@ app.post('/location', (req, res) => {
     const entries = locationData[name];
     if (entries.length >= 2) {
       const prevEntry = entries[entries.length - 2];
-      if (!areCoordsEqual(prevEntry.coords, coords)) {
+      if (!areCoordsEqual(prevEntry.coords, roundedCoords)) {
         lastMovedAt[name] = new Date(timestamp).getTime();
       }
     }

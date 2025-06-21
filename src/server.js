@@ -14,10 +14,10 @@ const locationData = {};
 const lastMovedAt = {};
 const userPushTokens = {};
 
-// round coordinates to 4 decimal places
+// round coordinates to 3 decimal places
 const roundCoords = ({ latitude, longitude }) => ({
-  latitude: parseFloat(latitude.toFixed(4)),
-  longitude: parseFloat(longitude.toFixed(4)),
+  latitude: parseFloat(latitude.toFixed(3)),
+  longitude: parseFloat(longitude.toFixed(3)),
 });
 
 const areCoordsEqual = (a, b) => {

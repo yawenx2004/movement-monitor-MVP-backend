@@ -68,7 +68,7 @@ setInterval(() => {
     const duration = now - stationarySince;
 
     if (isStationary && duration >= STATIONARY_TIME_THRESHOLD_MS) {
-      console.log(`🚨 ${name} has not moved in over 2 minutes!`);
+      console.log(`🚨 ${name} has not moved in over a minute! Alert sent to care circle.`);
       // TODO: Trigger alert or notification
     }
   }

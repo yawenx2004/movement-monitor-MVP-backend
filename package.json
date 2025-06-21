@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/yawenx2004/movement-monitor-MVP-backend#readme",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "expo-server-sdk": "^4.0.0"
   }
 }

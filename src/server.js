@@ -6,7 +6,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.send('Hello from backend!! :)');
+    res.json({ message: 'Hello from backend!! :)' });
 });
 
 // in-memory store for location data

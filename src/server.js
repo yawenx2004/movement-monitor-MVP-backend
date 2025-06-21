@@ -22,7 +22,7 @@ app.post('/location', (req, res) => {
     }
 
     const entry = {
-        timestam: new Date().toISOString(),
+        timestamp: new Date().toISOString(),
         coords
     }
 

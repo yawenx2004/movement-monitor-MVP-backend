@@ -38,18 +38,32 @@ app.post('/location', (req, res) => {
     res.status(200).json({ message: 'Location saved successfully' });
 });
 
-// check for inactivity every 2 minutes
-setInterval(() => {
-    const now = new Date();
-    const inactivityThreshold = 2 * 60 * 1000;
+// inactivity check
+const INACTIVITY_THRESHOLD_MS = 2 * 60 * 1000; // 2 minutes
+const areCoordsEqual = (a, b) => (
+  a.latitude === b.latitude && a.longitude === b.longitude
+);
 
-    for (const [name, lastTime] of Object.entries(lastActive)) {
-        const diff = now - lastTime;
-        if (diff > inactivityThreshold) {
-            console.log(`⚠️ User ${name} has been inactive for more than 2 minutes!`);
-            // TODO: trigger push notification or alert here
-        }
+setInterval(() => {
+  const now = Date.now();
+
+  for (const name in locationData) {
+    const entries = locationData[name];
+    if (entries.length < 2) continue;
+
+    const lastEntry = entries[entries.length - 1];
+    const prevEntry = entries[entries.length - 2];
+
+    const lastTime = new Date(lastEntry.timestamp).getTime();
+
+    const isStationary = areCoordsEqual(lastEntry.coords, prevEntry.coords);
+    const isInactive = now - lastTime > INACTIVITY_THRESHOLD_MS;
+
+    if (isStationary && isInactive) {
+      console.warn(`🚨 ${name} has not moved in over 2 minutes!`);
+      // TODO: send push notification + mock alert
     }
+  }
 }, 60 * 1000);
 
 app.listen(port, () => {
